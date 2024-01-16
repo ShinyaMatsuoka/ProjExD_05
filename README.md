@@ -33,3 +33,4 @@ sキーは直線状に発射し、aキーは屈折しながら発射する。
 * 'W'をマップに指定するとトラップがおける
 * 参考URL
 【Pygame】Pythonでゲームを作る -3Days-
+https://cpp-learning.com/wp-content/uploads/2018/11/Pygame_3Days.html
