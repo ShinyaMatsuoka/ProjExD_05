@@ -644,7 +644,7 @@ class Kokaton_Game:
                 while True:
                     clock.tick(60)
                     self.draw(screen)
-                    self.update(screen)
+                    self.update(screen, time_)
                     self.key_handler()
                     pygame.display.update()
                     current_time = pygame.time.get_ticks()  # 現在時刻を取得
@@ -672,7 +672,7 @@ class Kokaton_Game:
             # print(self.map.kokaton.coltm)
             if self.map.kokaton.life <= 0:
                 self.draw(screen)
-                self.update(screen)
+                self.update(screen, time_)
                 game_end(self.map.surface, self.map.kokaton.life, screen)
                 return
 
