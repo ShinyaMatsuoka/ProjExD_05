@@ -657,6 +657,11 @@ class Kokaton_Game:
                     clock.tick(60)
                     clear_image = load_image("clear.png")  # ゲームクリア画面を用意
                     screen.blit(clear_image, (0, 0))  # ゲームクリア画面を転送
+                    font = pygame.font.SysFont("hgp創英角ﾎﾟｯﾌﾟ体", 30)
+                    color=(0, 255, 255)
+                    image = font.render(f"{str((time_ % 3600) // 60).zfill(2)}:{str(time_ % 3600 % 60).zfill(2)}", 0, color)
+                    rect = 270, 300
+                    screen.blit(image, rect)
                     self.key_handler()
                     pygame.display.update()
                     current_time = pygame.time.get_ticks()  # 現在時刻を取得
