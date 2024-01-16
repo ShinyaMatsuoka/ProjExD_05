@@ -111,20 +111,30 @@ class Shot_a(pygame.sprite.Sprite):
             """衝突判定"""
             # ブロックとミサイルの衝突判定
             for block in self.blocks:
-                # if self.rect.x >= block.rect.left and self.rect.y <= block.rect.y:
-                #     print(1)
                 collide = self.rect.colliderect(block.rect)
                 if collide:  # 衝突するブロックあり
-                    self.rect.move_ip(-self.speed_x, -self.speed_y)
-                    self.speed_y *= -1
-                    if self.mirorr == 0 or self.mirorr == 2:
-                        self.mirorr += 1
-                        self.image = pygame.transform.rotozoom(self.image,  -90, 1)
-                        self.image.set_colorkey((255, 255, 255))
-                    elif self.mirorr == 1:
-                        self.mirorr += 1
-                        self.image = pygame.transform.rotozoom(self.image,  90, 1)
-                        self.image.set_colorkey((255, 255, 255))
+                    if self.rect.left < block.rect.left and self.rect.right < block.rect.right:
+                        self.rect.right = block.rect.left
+                        self.speed_x *= -1
+                        if self.mirorr == 0 or self.mirorr == 2:
+                            self.mirorr += 1
+                            self.image = pygame.transform.rotozoom(self.image,  90, 1)
+                            self.image.set_colorkey((255, 255, 255))
+                        elif self.mirorr == 1:
+                            self.mirorr += 1
+                            self.image = pygame.transform.rotozoom(self.image,  -90, 1)
+                            self.image.set_colorkey((255, 255, 255))
+                    else:
+                        self.rect.move_ip(-self.speed_x, -self.speed_y)
+                        self.speed_y *= -1
+                        if self.mirorr == 0 or self.mirorr == 2:
+                            self.mirorr += 1
+                            self.image = pygame.transform.rotozoom(self.image,  -90, 1)
+                            self.image.set_colorkey((255, 255, 255))
+                        elif self.mirorr == 1:
+                            self.mirorr += 1
+                            self.image = pygame.transform.rotozoom(self.image,  90, 1)
+                            self.image.set_colorkey((255, 255, 255))
                     if self.mirorr == 3:
                         self.kill()
 
@@ -146,16 +156,28 @@ class Shot_a(pygame.sprite.Sprite):
             for block in self.blocks:
                 collide = self.rect.colliderect(block.rect)
                 if collide:  # 衝突するブロックあり
-                    self.rect.move_ip(-self.speed_x, -self.speed_y)
-                    self.speed_y *= -1
-                    if self.mirorr == 0 or self.mirorr == 2:
-                        self.mirorr += 1
-                        self.image = pygame.transform.rotozoom(self.image,  90, 1)
-                        self.image.set_colorkey((255, 255, 255))
-                    elif self.mirorr == 1:
-                        self.mirorr += 1
-                        self.image = pygame.transform.rotozoom(self.image,  -90, 1)
-                        self.image.set_colorkey((255, 255, 255))
+                    if block.rect.left < self.rect.left and block.rect.right < self.rect.right:
+                        self.rect.left = block.rect.right
+                        self.speed_x *= -1
+                        if self.mirorr == 0 or self.mirorr == 2:
+                            self.mirorr += 1
+                            self.image = pygame.transform.rotozoom(self.image,  -90, 1)
+                            self.image.set_colorkey((255, 255, 255))
+                        elif self.mirorr == 1:
+                            self.mirorr += 1
+                            self.image = pygame.transform.rotozoom(self.image,  90, 1)
+                            self.image.set_colorkey((255, 255, 255))
+                    else:
+                        self.rect.move_ip(-self.speed_x, -self.speed_y)
+                        self.speed_y *= -1
+                        if self.mirorr == 0 or self.mirorr == 2:
+                            self.mirorr += 1
+                            self.image = pygame.transform.rotozoom(self.image,  90, 1)
+                            self.image.set_colorkey((255, 255, 255))
+                        elif self.mirorr == 1:
+                            self.mirorr += 1
+                            self.image = pygame.transform.rotozoom(self.image,  -90, 1)
+                            self.image.set_colorkey((255, 255, 255))
                     if self.mirorr == 3:
                         self.kill()
 
