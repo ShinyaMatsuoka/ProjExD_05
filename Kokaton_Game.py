@@ -555,6 +555,16 @@ def load_image(filename, colorkey=None):
         image.set_colorkey(colorkey, RLEACCEL)
     return image
 
+
+def time_show(time_, screen):
+    font = pygame.font.SysFont("hgp創英角ﾎﾟｯﾌﾟ体", 30)
+    color=(0, 255, 255)
+    image = font.render(f"{str((time_ % 3600) // 60).zfill(2)}:{str(time_ % 3600 % 60).zfill(2)}", 0, color)
+    rect = 250, 15
+    screen.blit(image, rect)
+    pygame.display.update()
+
+
 class Remaining_Enemies:
     """
     残り敵数の表示に関するクラス
@@ -621,10 +631,12 @@ class Kokaton_Game:
         # メインループ
         clock = pygame.time.Clock()
         self.remaining_enemies = Remaining_Enemies(self.map)
+        time_s = time.time()
         while True:
+            time_ = int(time.time() - time_s)
             clock.tick(60)
             self.draw(screen)
-            self.update(screen)
+            self.update(screen, time_)
             self.key_handler()
             pygame.display.update()
             if len(self.map.enemys) == 0:  # もし残りの敵がゼロならば
@@ -664,10 +676,11 @@ class Kokaton_Game:
                 game_end(self.map.surface, self.map.kokaton.life, screen)
                 return
 
-    def update(self, screen):
+    def update(self, screen, t):
         self.klife.update(self.map.kokaton.life, screen)
         self.remaining_enemies.update(screen, self.map)
         self.map.update()
+        time_show(t, screen)
 
     def draw(self, screen):
         self.map.draw()
